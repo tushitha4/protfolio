@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> Portfolio</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+:root{
+    --bg:#050f0b;
+    --accent:#3cff9e;
+    --border:rgba(60,255,158,.35);
+    --card:rgba(255,255,255,.04);
+    --text:#ffffff;
+    --muted:#9dbfb1;
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,Arial,sans-serif}
+html{scroll-behavior:smooth}
+body{
+    background:radial-gradient(circle at top left,#0c291e,#050f0b 65%);
+    color:var(--text);
+    overflow-x:hidden;
+    cursor:none;
+}
+
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+      radial-gradient(circle at 20% 30%,rgba(60,255,158,.18),transparent 45%),
+      radial-gradient(circle at 80% 70%,rgba(60,255,158,.12),transparent 45%);
+    animation:floatBG 12s infinite alternate;
+    z-index:-1;
+}
+@keyframes floatBG{
+    from{transform:translateY(0)}
+    to{transform:translateY(-40px)}
+}
+
+
+#cursor,#cursor-glow{
+    position:fixed;
+    pointer-events:none;
+    transform:translate(-50%,-50%);
+}
+#cursor{
+    width:14px;height:14px;
+    border:2px solid var(--accent);
+    border-radius:50%;
+    z-index:9999;
+}
+#cursor-glow{
+    width:80px;height:80px;
+    background:radial-gradient(circle,rgba(60,255,158,.25),transparent 70%);
+    z-index:9998;
+}
+
+
+nav{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 8%;
+    background:rgba(5,15,11,.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+}
+nav ul{display:flex;gap:30px;list-style:none}
+nav a{
+    color:var(--muted);
+    text-decoration:none;
+    font-weight:700;
+}
+nav a:hover{color:var(--accent)}
+
+.social-btn{
+    display:inline-block;
+    position:relative;
+    margin-left:15px;
+    padding:12px 16px;
+    border:1px solid var(--accent);
+    border-radius:12px;
+    text-decoration:none;
+    color:var(--accent);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.social-btn::before{
+    content:"";
+    position:absolute;
+    top:-4px; left:-4px; right:-4px; bottom:-4px;
+    border:2px solid rgba(60,255,158,0.3);
+    border-radius:14px;
+    pointer-events:none;
+}
+.social-btn::after{
+    content:"";
+    position:absolute;
+    top:4px; left:4px; right:4px; bottom:4px;
+    border:2px solid rgba(60,255,158,0.5);
+    border-radius:10px;
+    pointer-events:none;
+}
+.social-btn:hover{
+    transform: scale(1.1) rotateX(5deg) rotateY(5deg);
+    box-shadow: 0 10px 30px rgba(60,255,158,0.4);
+}
+
+
+section{padding:100px 8%}
+
+.hero{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:60px;
+}
+.hero h1{font-size:4rem}
+.hero span{color:var(--accent)}
+.hero p{margin-top:15px;color:var(--muted)}
+
+.profile-img{
+    width:320px;
+    height:320px;
+    border-radius:50%;
+    border:3px solid var(--accent);
+    padding:10px;
+    box-shadow:0 0 40px rgba(60,255,158,.35);
+    animation:floatPic 6s ease-in-out infinite;
+    transform-style: preserve-3d;
+}
+.profile-img img{
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    object-fit:cover;
+}
+@keyframes floatPic{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-14px)}
+}
+
+.btn{
+    display:inline-block;
+    margin-top:25px;
+    padding:14px 40px;
+    border:1px solid var(--accent);
+    border-radius:30px;
+    color:var(--accent);
+    text-decoration:none;
+    font-weight:bold;
+}
+.btn:hover{
+    background:var(--accent);
+    color:#000;
+}
+
+/* --- About Me Styles --- */
+#about {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.about-card {
+    position: relative;
+    background: var(--card);
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    backdrop-filter: blur(5px);
+}
+.about-card h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+.about-card h2 span {
+    color: var(--accent);
+}
+.about-card p {
+    color: var(--muted);
+    line-height: 1.8;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+/* --- Updated Education Timeline as per Pic --- */
+#education {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.edu-timeline {
+    position: relative;
+    padding: 20px 0;
+}
+
+/* The Vertical Glowing Line */
+.edu-timeline::before {
+    content: '';
+    position: absolute;
+    left: 20px; /* Aligns with the dots */
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--accent);
+    box-shadow: 0 0 15px var(--accent);
+}
+
+.timeline-item {
+    position: relative;
+    padding-left: 60px; /* Space for the line and dots */
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+}
+
+/* The Glowing Circular Dots */
+.dot {
+    position: absolute;
+    left: 12px; /* Centers dot on the line */
+    width: 18px;
+    height: 18px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 15px var(--accent);
+    z-index: 2;
+}
+
+/* The Education Info Container */
+/* --- Education Card with Animated Project Border --- */
+.edu-card-new {
+    position: relative;
+    background: #050505; /* Solid dark background */
+    padding: 20px 30px;
+    border-radius: 40px; 
+    width: 100%;
+    color: var(--text);
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: 0.3s ease;
+    overflow: hidden; /* Important for the border animation */
+}
+
+/* The Animated Border Effect */
+.edu-card-new::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 2px; /* Border Thickness */
+    border-radius: 40px; 
+    /* Gradient from Pink to Cyan */
+    background: linear-gradient(270deg, #3cff9e, #ff6cf3, #3cff9e, #ff6cf3);
+    background-size: 400% 400%;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    animation: moveBorder 5s linear infinite;
+}
+
+.edu-card-new:hover {
+    transform: translateX(15px);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 20px rgba(60, 255, 158, 0.2);
+}
+
+/* Ensure the moveBorder keyframe exists (it's likely already in your code) */
+@keyframes moveBorder {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+@keyframes floatEdu{
+    0%{transform: translateY(0px);}
+    50%{transform: translateY(-10px);}
+    100%{transform: translateY(0px);}
+}
+
+
+/* Container for the skills */
+.skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* Individual Skill Card */
+.skill-card {
+    background: rgba(255, 255, 255, 0.04);
+    padding: 20px 30px;
+    border-radius: 15px;
+    text-align: center;
+    color: #3cff9e; /* Your accent color */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    min-width: 130px;
+    transition: 0.3s ease;
+}
+
+/* The Icons/Symbols */
+.skill-card i {
+    font-size: 2.5rem;
+    /* This creates the neon glow effect */
+    text-shadow: 0 0 15px rgba(60, 255, 158, 0.6);
+}
+
+.skill-card span {
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.skill-card:hover {
+    transform: translateY(-10px);
+    background: rgba(60, 255, 158, 0.1);
+}
+@keyframes floatSkill{
+    0%{transform: translateY(0);}
+    50%{transform: translateY(-6px);}
+    100%{transform: translateY(0);}
+}
+
+.projects{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:30px;
+}
+.projects .card{
+    position:relative;
+    background:var(--card);
+    border-radius:20px;
+    padding:30px;
+    text-align:center;
+    transform-style: preserve-3d;
+    cursor:pointer;
+    overflow:hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.projects .card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 3px;
+    border-radius: 20px;
+    background: linear-gradient(270deg, #3cff9e, #ff6cf3, #3cff9e, #ff6cf3);
+    background-size: 400% 400%;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    animation: moveBorder 5s linear infinite;
+}
+.projects .card:hover{
+    transform: perspective(800px) rotateX(5deg) rotateY(5deg) scale(1.05);
+    box-shadow:0 20px 40px rgba(60,255,158,.35);
+}
+
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.8);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:2000;
+}
+.modal-content{
+    background:var(--card);
+    border:1px solid var(--border);
+    padding:40px;
+    border-radius:20px;
+    max-width:500px;
+    animation:pop .4s ease forwards;
+}
+@keyframes pop{
+    from{opacity:0;transform:scale(.8)}
+    to{opacity:1;transform:scale(1)}
+}
+.close{
+    float:right;
+    font-size:26px;
+    cursor:pointer;
+    color:var(--accent);
+}
+
+#contact{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    min-height:80vh;
+}
+#contact input,#contact textarea{
+    max-width:400px;
+    width:100%;
+    margin:10px 0;
+    padding:15px;
+    border-radius:12px;
+    border:1px solid var(--border);
+    background:#000;
+    color:#fff;
+    animation:floatContact 3s ease-in-out infinite alternate;
+}
+#contact button{
+    max-width:250px;
+    width:100%;
+    padding:18px 0;
+    margin-top:20px;
+    background: linear-gradient(145deg, #3cff9e, #ff6cf3);
+    color:#000;
+    font-weight:bold;
+    font-size:18px;
+    border:none;
+    border-radius:35px;
+    cursor:pointer;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(60,255,158,0.3);
+    animation:floatContact 3s ease-in-out infinite alternate;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+#contact button:hover{
+    transform: scale(1.1) rotateX(3deg) rotateY(3deg);
+    box-shadow: 0 15px 30px rgba(60,255,158,0.5);
+}
+#contact button::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    padding:3px;
+    border-radius:35px;
+    background: linear-gradient(270deg, #3cff9e, #ff6cf3, #3cff9e, #ff6cf3);
+    background-size:400% 400%;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events:none;
+    animation: moveBorder 5s linear infinite;
+}
+@keyframes floatContact{
+    0%{transform: translateY(0);}
+    50%{transform: translateY(-8px);}
+    100%{transform: translateY(0);}
+}
+
+
+footer{
+    background:rgba(5,15,11,.85);
+    backdrop-filter:blur(10px);
+    padding:40px 8%;
+    text-align:center;
+    border-top:1px solid var(--border);
+    color:var(--muted);
+}
+footer .social-btn{
+    margin:0 10px;
+    transform: scale(1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+footer .social-btn:hover{
+    transform: scale(1.1) rotateX(5deg) rotateY(5deg);
+    box-shadow: 0 10px 30px rgba(60,255,158,0.4);
+}
+
+@media(max-width:900px){
+.hero{flex-direction:column;text-align:center}
+.hero h1{font-size:3rem}
+.profile-img{margin-top:30px;}
+.skills{justify-content:center;}
+}
+
+@keyframes moveBorder {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* --- Achievements Section --- */
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.achievement-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 30px;
+    border-radius: 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.achievement-card:hover {
+    background: rgba(60, 255, 158, 0.08);
+    border-color: var(--accent);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.achievement-card i {
+    font-size: 2rem;
+    color: var(--accent);
+    text-shadow: 0 0 10px var(--accent);
+}
+
+.achievement-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+    color: var(--text);
+}
+
+.achievement-card p {
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+/* Glass shine effect on hover */
+.achievement-card::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.05), transparent);
+    transform: rotate(45deg);
+    transition: 0.6s;
+}
+
+.achievement-card:hover::after {
+    left: 100%;
+}
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-glow"></div>
+
+<nav>
+    <strong>Tushita</strong>
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#achievements">Achievements</a></li> 
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="social">
+        <a href="https://www.linkedin.com/in/tushita-pk-28k42/" target="_blank" class="social-btn">
+            <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://github.com/tushitha4" target="_blank" class="social-btn">
+            <i class="fab fa-github"></i>
+        </a>
+    </div>
+</nav>
+
+
+<section id="home" class="hero">
+    <div>
+        <h1>Hi, I'm <span>Tushita</span></h1>
+        <p>Full Stack Developer building immersive and futuristic web experiences.</p>
+        <a href="resume.pdf" class="btn" download target="_blank">Download Resume</a>
+    </div>
+    <div class="profile-img">
+        <img src="1.jpg" alt="Profile Photo">
+    </div>
+</section>
+
+<section id="about">
+    <div class="about-card">
+        <h2>About <span>Me</span></h2>
+        <p>
+            I am a dedicated <strong>Full Stack Developer</strong> with a passion for creating seamless, user-centric web applications. 
+            My technical journey is fueled by a blend of creativity and logical problem-solving, allowing me to build 
+            dynamic frontends and robust backends.
+        </p>
+        <p>
+            With expertise in modern frameworks and a background in Computer Science Engineering, I focus on 
+            performance, scalability, and aesthetic design. I am always eager to learn new technologies and 
+            collaborate on innovative projects that push the boundaries of the digital world.
+        </p>
+    </div>
+</section>
+
+<section id="education">
+    <h2 style="text-align:left; margin-bottom: 50px; font-size: 2.5rem;">Education</h2>
+    
+    <div class="edu-timeline">
+        <div class="timeline-item">
+            <div class="dot"></div>
+            <div class="edu-card-new">
+                Bachelor of Engineering in Computer Science - GPCET College
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="dot"></div>
+            <div class="edu-card-new">
+                Diploma in Electrical & Electronics - BITS Polytechnic
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="dot"></div>
+            <div class="edu-card-new">
+                SSC, Ravindra EM School
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section id="skills">
+    <h2>Skills</h2>
+    <div class="skills">
+        <div class="skill-card">
+            <i class="fab fa-html5"></i>
+            <span>HTML5</span>
+        </div>
+        <div class="skill-card">
+            <i class="fab fa-css3-alt"></i>
+            <span>CSS3</span>
+        </div>
+        <div class="skill-card">
+            <i class="fab fa-js"></i>
+            <span>JavaScript</span>
+        </div>
+        <div class="skill-card">
+            <i class="fab fa-react"></i>
+            <span>React</span>
+        </div>
+        <div class="skill-card">
+            <i class="fab fa-node-js"></i>
+            <span>Node.js</span>
+        </div>
+        <div class="skill-card">
+            <i class="fab fa-python"></i>
+            <span>Python</span>
+        </div>
+        <div class="skill-card">
+            <i class="fas fa-database"></i>
+            <span>SQL</span>
+        </div>
+    </div>
+</section>
+
+<section id="projects">
+<h2>Projects</h2>
+<div class="projects">
+    <div class="card">
+        <h3>Personal Portfolio Website</h3>
+        <p>Secure web platform</p>
+        <button class="btn small" onclick="openProject(
+            'Personal Portfolio Website',
+            'Developed a responsive personal portfolio website to showcase skills, projects, and contact information. Designed a clean and user-friendly interface using HTML, CSS, and JavaScript. Implemented smooth navigation and interactive features for better user experience. Ensured mobile and desktop responsiveness for consistent performance across devices. Helps recruiters quickly understand my profile and work.' 
+        )">View Details</button>
+    </div>
+    <div class="card">
+        <h3>E-commerce project</h3>
+        <p>Scalable backend</p>
+        <button class="btn small" onclick="openProject(
+            'E-commerce project',
+            'Developed a user-friendly e-commerce web application with product listing and shopping cart features. Implemented Add to Cart, Remove, and Total Price calculation functionalities. Designed a responsive and attractive UI using HTML, CSS, JavaScript / React. Focused on smooth navigation and better user experience. Demonstrates understanding of frontend development and basic business logic.' 
+        )">View Details</button>
+    </div>
+    <div class="card">
+        <h3>Soil Forecasting and Plant Disease Detection</h3>
+        <button class="btn small" onclick="openProject(
+            'Soil Forecasting and Plant Disease Detection Engine',
+            'Developed a user-friendly application that integrates soil fertility prediction, crop recommendation, and plant disease detection. Used Machine Learning classifiers like Random Forest, Decision Tree, SVC, Logistic Regression, Gaussian NB, and MLP for soil fertility prediction. Implemented Random Forest, Decision Tree, SVC, AdaBoost, and XGBoost models for crop prediction to achieve better accuracy.' 
+        )">View Details</button>
+    </div>
+</div>
+</section>
+<section id="achievements">
+    <h2>Certifications & <span>Achievements</span></h2>
+    <div class="achievements-grid">
+        <div class="achievement-card">
+            <i class="fas fa-certificate"></i>
+            <div>
+                <h3>Full Stack Development Certification</h3>
+                <p>Successfully completed intensive training in MERN stack, building 5+ production-ready web applications.</p>
+            </div>
+        </div>
+
+        <div class="achievement-card">
+            <i class="fas fa-trophy"></i>
+            <div>
+                <h3>Technical Presentation - GPCET</h3>
+                <p>Awarded 1st place in the college technical symposium for presenting innovative solutions in Soil Forecasting using ML.</p>
+            </div>
+        </div>
+
+        <div class="achievement-card">
+            <i class="fas fa-award"></i>
+            <div>
+                <h3>Python Programming Specialist</h3>
+                <p>Certified by NPTEL for advanced algorithmic problem solving and data structures in Python.</p>
+            </div>
+        </div>
+
+        <div class="achievement-card">
+            <i class="fas fa-star"></i>
+            <div>
+                <h3>5-Star Coder on HackerRank</h3>
+                <p>Achieved a 5-star rating in Problem Solving and JavaScript domains by solving complex algorithmic challenges.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="contact">
+<h2>Contact Me</h2>
+<input id="name" placeholder="Your Name">
+<input id="email" placeholder="Email">
+<textarea id="message" rows="4" placeholder="Message"></textarea>
+<button class="btn" onclick="sendMessage()">Send</button>
+</section>
+
+
+<div class="modal" id="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeProject()">×</span>
+        <h3 id="mTitle"></h3>
+        <p id="mDesc"></p>
+    </div>
+</div>
+
+
+<footer>
+    <p>© 2026 Tushita PK. All Rights Reserved.</p>
+    <div style="margin-top:15px;">
+        <a href="inkedin.com/in/tushita-pk-28k42/" target="_blank" class="social-btn">
+            <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://github.com/tushitha4" target="_blank" class="social-btn">
+            <i class="fab fa-github"></i>
+        </a>
+        <a href="mailto:youremail@example.com" class="social-btn">
+            <i class="fas fa-envelope"></i>
+        </a>
+    </div>
+</footer>
+
+<script>
+
+const c=document.getElementById("cursor");
+const g=document.getElementById("cursor-glow");
+document.addEventListener("mousemove",e=>{
+    c.style.left=g.style.left=e.clientX+"px";
+    c.style.top=g.style.top=e.clientY+"px";
+});
+
+
+function openProject(t,d){
+    document.getElementById("mTitle").innerText=t;
+    document.getElementById("mDesc").innerText=d;
+    document.getElementById("modal").style.display="flex";
+}
+function closeProject(){
+    document.getElementById("modal").style.display="none";
+}
+
+const photo=document.querySelector(".profile-img");
+photo.addEventListener("mousemove",e=>{
+    const r=photo.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width-0.5;
+    const y=(e.clientY-r.top)/r.height-0.5;
+    photo.style.transform=`perspective(800px) rotateY(${x*25}deg) rotateX(${-y*25}deg)`;
+});
+photo.addEventListener("mouseleave",()=>photo.style.transform="none");
+
+
+const projectCards = document.querySelectorAll(".projects .card");
+projectCards.forEach(card=>{
+    card.addEventListener("mousemove", e=>{
+        const rect = card.getBoundingClientRect();
+        const x = ((e.clientX - rect.left)/rect.width - 0.5)*15;
+        const y = ((e.clientY - rect.top)/rect.height - 0.5)*15;
+        card.style.transform = `perspective(800px) rotateY(${x}deg) rotateX(${-y}deg) scale(1.05)`;
+    });
+    card.addEventListener("mouseleave",()=> {
+        card.style.transform = "";
+    });
+});
+
+
+const skillCards = document.querySelectorAll(".skill-card");
+skillCards.forEach(card=>{
+    card.addEventListener("mousemove", e=>{
+        const rect = card.getBoundingClientRect();
+        const x = ((e.clientX - rect.left)/rect.width - 0.5)*10;
+        const y = ((e.clientY - rect.top)/rect.height - 0.5)*10;
+        card.style.transform = `perspective(600px) rotateY(${x}deg) rotateX(${-y}deg) scale(1.05)`;
+    });
+    card.addEventListener("mouseleave",()=> card.style.transform = "");
+});
+
+
+function sendMessage(){
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const message = document.getElementById("message").value.trim();
+
+    if(!name || !email || !message){
+        alert("Please fill in all fields before sending!");
+        return;
+    }
+
+    alert(`Thank you, ${name}! Your message has been sent.\n\nEmail: ${email}\nMessage: ${message}`);
+
+    document.getElementById("name").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("message").value = "";
+}
+</script>
+
+</body>
+</html>
